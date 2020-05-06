@@ -21,6 +21,8 @@ class CreateMemberPreviousChurchesTable extends Migration
             $table->string('was_member')->nullable();
             $table->string('duration')->nullable();
             $table->string('image_url')->nullable();
+            $table->string('previous_pastor_name')->nullable();
+            $table->string('previous_pastor_phone')->nullable();
             $table->timestamps();
 
             $table->foreign('member_id')->references('id')->on('members')->onDelete('set null');

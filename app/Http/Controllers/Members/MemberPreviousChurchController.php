@@ -189,7 +189,7 @@ class MemberPreviousChurchController extends Controller
         try{
             $credential = request()->only(
 
-                'member_id', 'church_name', 'leaving_reason', 'was_member', 'duration', 'image_file'
+                'member_id', 'church_name', 'leaving_reason', 'was_member', 'duration', 'image_file', 'previous_pastor_name', 'previous_pastor_phone'
             );
             $rules = [
                 'church_name' => 'required',
@@ -228,6 +228,8 @@ class MemberPreviousChurchController extends Controller
                 $item->leaving_reason = isset($credential['leaving_reason']) ? $credential['leaving_reason'] : null;
                 $item->was_member = isset($credential['was_member']) ? $credential['was_member'] : null;
                 $item->duration = isset($credential['duration']) ? $credential['duration'] : null;
+                $item->previous_pastor_name = isset($credential['previous_pastor_name']) ? $credential['previous_pastor_name'] : null;
+                $item->previous_pastor_phone = isset($credential['previous_pastor_phone']) ? $credential['previous_pastor_phone'] : null;
 
                 if ($item->save()) {
                     return response()->json(['status' => true, 'message' => 'Item Successfully Created', 'result' => $item], 200);
@@ -248,7 +250,7 @@ class MemberPreviousChurchController extends Controller
 
         try{
             $credential = request()->only(
-                'id', 'member_id', 'church_name', 'leaving_reason', 'was_member', 'duration'
+                'id', 'member_id', 'church_name', 'leaving_reason', 'was_member', 'duration', 'previous_pastor_name', 'previous_pastor_phone'
             );
 
             $rules = [
@@ -285,6 +287,8 @@ class MemberPreviousChurchController extends Controller
                 $oldItem->was_member = isset($credential['was_member'])? $credential['was_member']: $oldItem->was_member;
                 $oldItem->duration = isset($credential['duration'])? $credential['duration']: $oldItem->duration;
                 $oldItem->image_url = isset($image_url)? $image_url: $oldItem->image_url;
+                $oldItem->previous_pastor_name = isset($credential['previous_pastor_name']) ? $credential['previous_pastor_name'] : $oldItem['previous_pastor_name'];
+                $oldItem->previous_pastor_phone = isset($credential['previous_pastor_phone']) ? $credential['previous_pastor_phone'] : $oldItem['previous_pastor_phone'];
 
                 if($oldItem->update()){
                     return response()->json(['status'=> true, 'message'=> 'Item Successfully Updated', 'result'=>$oldItem],200);
@@ -315,6 +319,8 @@ class MemberPreviousChurchController extends Controller
                 $item->was_member = isset($credential['was_member'])? $credential['was_member']: null;
                 $item->duration = isset($credential['duration'])? $credential['duration']: null;
                 $item->image_url = isset($image_url)? $image_url: null;
+                $item->previous_pastor_name = isset($credential['previous_pastor_name']) ? $credential['previous_pastor_name'] : null;
+                $item->previous_pastor_phone = isset($credential['previous_pastor_phone']) ? $credential['previous_pastor_phone'] : null;
 
                 if($item->save()){
                     return response()->json(['status'=> true, 'message'=> 'Item Successfully Updated', 'result'=>$item],200);
